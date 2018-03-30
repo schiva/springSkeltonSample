@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:component-scan base-package="com.schiva">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
+          destroy-method="close">
+        <constructor-arg>
+            <bean class="com.zaxxer.hikari.HikariConfig">
+                <constructor-arg>
+                    <props>
+                        <prop key="jdbcUrl">jdbc:log4jdbc:mysql://127.0.0.1:3306/study?useSSL=false</prop>
+                        <prop key="username">schiva</prop>
+                        <prop key="password">1111</prop>
+                    </props>
+                </constructor-arg>
+                <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+                <property name="minimumIdle" value="5" />
+                <property name="maximumPoolSize" value="100" />
+                <property name="connectionTestQuery" value="SELECT 1" />
+                <property name="connectionTimeout" value="300000" />
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:/mybatis-config.xml"></property>
+        <property name="mapperLocations" value="classpath:/mapper/*.xml" />
+    </bean>
+
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg ref="sqlSessionFactory" />
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- @Transactional annotation을 이용한 트랜잭션 제어 사용. -->
+    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+
+    <aop:config proxy-target-class="true">
+        <aop:pointcut id="serviceOperation" expression="execution(public * com.schiva..service.*Service.*(..))" />
+        <aop:advisor id="transactionAdvisor" pointcut-ref="serviceOperation" advice-ref="txAdvice"/>
+    </aop:config>
+
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="insert*" rollback-for="Exception"/>
+            <tx:method name="update*" rollback-for="Exception"/>
+            <tx:method name="delete*" rollback-for="Exception"/>
+        </tx:attributes>
+    </tx:advice>
+
+</beans>

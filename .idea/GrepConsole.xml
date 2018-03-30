@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GrepConsole">
+    <option name="pinnedGrepConsolesState">
+      <PinnedGrepConsolesState>
+        <option name="map">
+          <map>
+            <entry>
+              <key>
+                <RunConfigurationRef>
+                  <option name="icon" value="tomcat.png" />
+                  <option name="name" value="tomcat" />
+                </RunConfigurationRef>
+              </key>
+              <value>
+                <Pins>
+                  <option name="pins">
+                    <list>
+                      <Pin>
+                        <option name="consoleUUID" value="ee93cf16-a726-46a7-8bb4-4b3b54bd7e9f" />
+                        <option name="grepModel">
+                          <GrepModel>
+                            <option name="expression" value="" />
+                            <option name="unlessExpression" value="" />
+                          </GrepModel>
+                        </option>
+                      </Pin>
+                      <Pin>
+                        <option name="consoleUUID" value="5dc83a0f-bd95-4913-8e41-04abd809fd54" />
+                        <option name="grepModel">
+                          <GrepModel>
+                            <option name="expression" value="" />
+                            <option name="unlessExpression" value="" />
+                          </GrepModel>
+                        </option>
+                      </Pin>
+                      <Pin>
+                        <option name="consoleUUID" value="ff7733ef-9d75-49ac-a30d-a86de3c24f13" />
+                        <option name="grepModel">
+                          <GrepModel>
+                            <option name="expression" value="" />
+                            <option name="unlessExpression" value="" />
+                          </GrepModel>
+                        </option>
+                      </Pin>
+                    </list>
+                  </option>
+                </Pins>
+              </value>
+            </entry>
+          </map>
+        </option>
+      </PinnedGrepConsolesState>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="springSkelton:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="springSkelton.war">
+      <element id="artifact" artifact-name="springSkelton:war exploded" />
+    </root>
+  </artifact>
+</component>
