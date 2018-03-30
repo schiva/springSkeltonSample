@@ -19,7 +19,7 @@ public class test2DAOImp implements test2Dao{
     @Override
     public void insertData(test2VO record) throws SQLException{
 
-        session.insert("test2.insertData", record);
+        session.insert("test2.insert", record);
     }
 
 

@@ -29,6 +29,7 @@ public class test2Controller {
         record.name   = "홍길동";
         record.email  = "schiva@schiva.com";
 
+        logger.info("Record:" + record);
         try {
             svc.insertTest(record);
         } catch (SQLException e) {
